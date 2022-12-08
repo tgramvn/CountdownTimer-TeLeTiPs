@@ -24,15 +24,7 @@ footer_message = os.environ["FOOTER_MESSAGE"]
 stoptimer = False
 
 TELETIPS_MAIN_MENU_BUTTONS = [
-            [
-                InlineKeyboardButton('❓ HELP', callback_data="HELP_CALLBACK")
-            ],
-            [
-                InlineKeyboardButton('👥 SUPPORT', callback_data="GROUP_CALLBACK"),
-                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/teletipsofficialchannel'),
-                InlineKeyboardButton('👨‍💻 CREATOR', url='https://t.me/teIetips')
-            ],
-            [
+         [
                 InlineKeyboardButton('➕ CREATE YOUR BOT ➕', callback_data="TUTORIAL_CALLBACK")
             ]
         ]
@@ -67,9 +59,6 @@ async def callback_query(client: Client, query: CallbackQuery):
     elif query.data=="GROUP_CALLBACK":
         TELETIPS_GROUP_BUTTONS = [
             [
-                InlineKeyboardButton("TeLe TiPs Chat [EN]", url="https://t.me/teletipsofficialontopicchat")
-            ],
-            [
                 InlineKeyboardButton("⬅️ BACK", callback_data="START_CALLBACK"),
             ]
             ]
@@ -84,9 +73,6 @@ async def callback_query(client: Client, query: CallbackQuery):
 
     elif query.data=="TUTORIAL_CALLBACK":
         TELETIPS_TUTORIAL_BUTTONS = [
-            [
-                InlineKeyboardButton("🎥 Video", url="https://youtu.be/nYSrgdIYdTw")
-            ],
             [
                 InlineKeyboardButton("⬅️ BACK", callback_data="START_CALLBACK"),
             ]
@@ -103,15 +89,7 @@ async def callback_query(client: Client, query: CallbackQuery):
     elif query.data=="START_CALLBACK":
         TELETIPS_START_BUTTONS = [
             [
-                InlineKeyboardButton('❓ HELP', callback_data="HELP_CALLBACK")
-            ],
-            [
-                InlineKeyboardButton('👥 SUPPORT', callback_data="GROUP_CALLBACK"),
-                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/teletipsofficialchannel'),
-                InlineKeyboardButton('👨‍💻 CREATOR', url='https://t.me/teIetips')
-            ],
-            [
-                InlineKeyboardButton('➕ CREATE YOUR BOT ➕', callback_data="TUTORIAL_CALLBACK")
+                InlineKeyboardButton("⬅️ BACK", callback_data="START_CALLBACK"),
             ]
         ]
         reply_markup = InlineKeyboardMarkup(TELETIPS_START_BUTTONS)
@@ -132,7 +110,7 @@ async def set_timer(client, message):
         elif not (await client.get_chat_member(message.chat.id,message.from_user.id)).privileges:
             return await message.reply('👮🏻‍♂️ Sorry, **only admins** can execute this command.')    
         elif len(message.command)<3:
-            return await message.reply('❌ **Incorrect format.**\n\n✅ Format should be like,\n<code> /set seconds "event"</code>\n\n**Example**:\n <code>/set 10 "10 seconds countdown"</code>')    
+            return await message.reply('❌ **Incorrect format.**')    
         else:
             user_input_time = int(message.command[1])
             user_input_event = str(message.command[2])
@@ -186,7 +164,7 @@ async def set_timer(client, message):
                     user_input_time -=9
                 await finish_countdown.edit("🚨 Beep! Beep!! **TIME'S UP!!!**")
             else:
-                await get_user_input_time.edit(f"🤷🏻‍♂️ I can't countdown from {user_input_time}")
+                await get_user_input_time.edit(f"🤷🏻‍♂️ Thất bại {user_input_time}")
                 await get_user_input_time.unpin()
     except FloodWait as e:
         await asyncio.sleep(e.value)
